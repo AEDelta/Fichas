@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Fechamento Mensal</h3>
+<form class="row g-2 mb-3" method="get">
+  <div class="col-md-2">
+    <label class="form-label">Mês</label>
+    <input type="number" name="mes" class="form-control" min="1" max="12" value="{{ mes }}">
+  </div>
+  <div class="col-md-2">
+    <label class="form-label">Ano</label>
+    <input type="number" name="ano" class="form-control" value="{{ ano }}">
+  </div>
+  <div class="col-md-2 d-flex align-items-end">
+    <button class="btn btn-outline-primary w-100">Atualizar</button>
+  </div>
+  <div class="col-md-3 d-flex align-items-end">
+    <a class="btn btn-success w-100" href="{{ url_for('financeiro.exportar_csv', mes=mes, ano=ano) }}">Exportar CSV</a>
+  </div>
+</form>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th><th>Data</th><th>Veículo</th><th>Placa</th>
+        <th>Serviço</th><th>Fornecedor</th><th>Valor</th><th>Status</th><th>Forma Pagamento</th><th>Nota Fiscal</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for f in fichas %}
+      <tr>
+        <td>{{ f.id }}</td>
+        <td>{{ f.data.strftime('%d/%m/%Y') if f.data else '' }}</td>
+        <td>{{ f.veiculo }}</td>
+        <td>{{ f.placa }}</td>
+        <td>{{ f.servico }}</td>
+        <td>{{ f.fornecedor or '' }}</td>
+        <td>R$ {{ '%.2f'|format(f.valor or 0) }}</td>
+        <td>{{ f.status|capitalize }}</td>
+        <td>{{ f.forma_pagamento or '' }}</td>
+        <td>{{ f.nota_fiscal or '' }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-info">
+  <strong>Total do mês:</strong> R$ {{ '%.2f'|format(total or 0) }}
+</div>
+{% endblock %}

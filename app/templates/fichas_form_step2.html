@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Nova Ficha — Etapa 2 (Dados complementares)</h3>
+
+<form method="post">
+  <div class="row g-3">
+    <div class="col-md-3">
+      <label class="form-label">CEP</label>
+      <input name="endereco_cep" class="form-control" required>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Número</label>
+      <input name="endereco_numero" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Complemento</label>
+      <input name="endereco_complemento" class="form-control">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Celular (DDD + número)</label>
+      <input name="celular" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Forma de Pagamento</label>
+      <select name="forma_pagamento" class="form-select" required>
+        <option value="">-- selecione --</option>
+        <option value="credito">Crédito</option>
+        <option value="debito">Débito</option>
+        <option value="pix">Pix</option>
+        <option value="dinheiro">Dinheiro</option>
+        <option value="a_pagar">A Pagar</option>
+        <option value="pago">Pago</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Nota Fiscal</label>
+      <input name="nota_fiscal" class="form-control">
+    </div>
+
+    <div class="col-12 d-flex gap-2">
+      <a class="btn btn-outline-secondary" href="{{ url_for('fichas.nova_etapa1') }}">Voltar</a>
+      <button class="btn btn-success">Salvar</button>
+    </div>
+  </div>
+</form>
+{% endblock %}

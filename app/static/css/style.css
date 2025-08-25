@@ -1,0 +1,29 @@
+/* ====== Paleta Prevencar ====== */
+:root {
+  --azul: #030A8C;
+  --azul_a: #71BCFF;
+  --vermelho: #ca2c23;
+  --roxo: #824060;
+  --amarelo: #eac32f;
+}
+
+/* Navbar principal */
+.navbar.bg-primary {
+  background-color: var(--azul) !important;
+}
+
+/* Botão padrão */
+.btn-primary {
+  background-color: var(--vermelho);
+  border-color: var(--vermelho);
+}
+.btn-primary:hover {
+  background-color: #a3221a;
+  border-color: #a3221a;
+}
+
+/* Links do navbar */
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: var(--azul_a) !important;
+}

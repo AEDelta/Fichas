@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>{{ 'Editar Usuário' if user else 'Novo Usuário' }}</h3>
+<form method="post">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Nome</label>
+      <input name="name" class="form-control" value="{{ user.name if user else '' }}" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Email</label>
+      <input name="email" type="email" class="form-control" value="{{ user.email if user else '' }}" required>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Perfil</label>
+      <select name="role" class="form-select">
+        {% for r in ['admin','financeiro','vistoriador'] %}
+          <option value="{{ r }}" {% if user and user.role==r %}selected{% endif %}>{{ r|capitalize }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Senha {% if user %}(deixe vazio para não alterar){% endif %}</label>
+      <input name="password" type="password" class="form-control">
+    </div>
+    {% if user %}
+    <div class="col-md-3 form-check ms-2 mt-2">
+      <input class="form-check-input" type="checkbox" name="active" {% if user.active %}checked{% endif %}>
+      <label class="form-check-label">Ativo</label>
+    </div>
+    {% endif %}
+    <div class="col-12">
+      <button class="btn btn-primary">Salvar</button>
+    </div>
+  </div>
+</form>
+{% endblock %}

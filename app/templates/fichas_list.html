@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>Fichas</h3>
+  <a class="btn btn-success" href="{{ url_for('fichas.nova_etapa1') }}">+ Nova Ficha</a>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th><th>Data</th><th>Veículo</th><th>Placa</th>
+        <th>Serviço</th><th>Fornecedor</th><th>Valor</th><th>Status</th><th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for f in fichas %}
+      <tr>
+        <td>{{ f.id }}</td>
+        <td>{{ f.data.strftime('%d/%m/%Y') if f.data else '' }}</td>
+        <td>{{ f.veiculo }}</td>
+        <td>{{ f.placa }}</td>
+        <td>{{ f.servico }}</td>
+        <td>{{ f.fornecedor or '' }}</td>
+        <td>R$ {{ '%.2f'|format(f.valor or 0) }}</td>
+        <td>{{ f.status|capitalize }}</td>
+        <td>
+          <a class="btn btn-sm btn-primary" href="{{ url_for('fichas.editar', ficha_id=f.id) }}">Editar</a>
+          <form method="post" action="{{ url_for('fichas.excluir', ficha_id=f.id) }}" style="display:inline" onsubmit="return confirm('Excluir ficha #{{ f.id }}?')">
+            <button class="btn btn-sm btn-danger">Excluir</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

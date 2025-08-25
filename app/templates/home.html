@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Criar Ficha</h5>
+        <p class="card-text">Cadastrar uma nova ficha (Etapa 1 → Etapa 2).</p>
+        <a href="{{ url_for('fichas.nova_etapa1') }}" class="btn btn-primary">Nova Ficha</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Listar Fichas</h5>
+        <p class="card-text">Consultar, editar e excluir fichas.</p>
+        <a href="{{ url_for('fichas.index') }}" class="btn btn-primary">Abrir Lista</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Fechamento Mensal</h5>
+        <p class="card-text">Totais por mês e exportação CSV.</p>
+        <a href="{{ url_for('financeiro.fechamento') }}" class="btn btn-primary">Ver Fechamento</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
